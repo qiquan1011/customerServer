@@ -1,0 +1,31 @@
+customer: '//*[@id="app"]/div/div[2]/div[2]/div/a[4]' #人工客服头像
+customer_text: '//*[@id="app"]/div/div[2]/div[2]/div/a[4]/span'
+
+customerservice:
+  serverSatisficing: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div[2]/div[5]/a/span' #客服满意度
+  chooseTime: '//*[@id="app"]/div/div[2]/div[2]/div[1]/div[1]/span/span'  #时间选择框
+  #threeMonths: '/html/body/div[2]/div/div/div/div/div[2]/div/div/span[3]' #最近三个月
+  threeMonths: '/html/body/div[2]/div/div/div/div/div[2]/div/div'
+  startTime: '/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input' #开始时间
+  endTime: '/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input' #结束时间
+  allListCount: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/ul/li[1]' #总计查询条数
+  noCount: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/p' #暂无数据
+
+condition_Satisfaction:
+  satisfaction: '//*[@id="app"]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div/div' #满意度选择框
+  allSatisfaction: '//body/div[3]/div/div/div/ul/li[1]' #全部满意度
+  very_Dissatisfied: '//body/div[3]/div/div/div/ul/li[2]' #非常不满意
+  dissatisfied: '//body/div[3]/div/div/div/ul/li[3]' #不满意
+  commonly: '//body/div[3]/div/div/div/ul/li[4]' #一般
+  satisfied: '//body/div[3]/div/div/div/ul/li[5]' #满意
+  very_Satisfied: '//body/div[3]/div/div/div/ul/li[6]' #非常满意
+  list_Satisfied: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]/td[4]' #列表中的满意度
+  customer: '//*[@id="app"]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div' #接待客服
+  customer_Name: '//body/div[3]/div/div/div/ul/li[2]'  #客服01
+  list_customer: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]/td[2]' #列表中接待客服
+  close_chat: '/html/body/div[2]/span/div/a/span' #关闭小弹窗
+  downlode: '//*[@id="app"]/div/div[2]/div[2]/div[1]/div[2]/i[1]' #导出按钮
+  visitorId: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]/td[1]' #访客Id
+  chatList: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]/td[6]/span/i' #查看会话记录按钮
+  message_visitorId: '/html/body/div[3]/div/div[2]/div/div/div[2]/div/div[1]/p[2]/span[1]' #聊天记录中的访客Id
+

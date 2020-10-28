@@ -1,0 +1,12 @@
+Quality_inspection:
+  quality_inspection_text: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div[4]/div[4]/a/span/span'  #质检表单
+  newly_added: '//*[@id="app"]/div/div[2]/div[2]/button' #新增按钮
+  form_name: '//*[@id="basicInfo_name"]' #表单名称
+  form_description: '//*[@id="basicInfo_info"]' #表单描述
+  form_Template: '//*[@id="basicInfo_mouldType"]/label/span[2]/span' #表单模板
+  level_classification: '//*[@id="basicInfo_levelType"]' #等级分类按钮
+  values_pass: '//*[@id="basicInfo_passScore"]/div[2]/input' #通过值选择框
+  next_step: '/html/body/div[2]/div/div[2]/div/div[2]/div[3]/div/button[2]'
+
+
+

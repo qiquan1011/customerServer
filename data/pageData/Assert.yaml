@@ -1,0 +1,5 @@
+login_username: '请输入密码'
+login_password: '请输入用户名/手机号/邮箱'
+login_AllError: '用户名或密码错误'
+
+myContent: '我的对话'

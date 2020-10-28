@@ -1,0 +1,31 @@
+service_Summary:
+  serviceSummary: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div[2]/div[4]/a' #服务小结
+  chooseTime: '//*[@id="app"]/div/div[2]/div[2]/div/span/span' #时间选择框
+  startTime: '//div[@class="ant-calendar-date-input-wrap"]/input[1]' #开始时间
+  Last_three_months: '/html/body/div[3]/div/div/div/div/div[2]/div/div/span[3]' #最近三个月
+  list_visitorName: '//*[@id="app"]/div/div[2]/div[3]/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td[1]' #列表中的访客姓名
+
+  choose_box: '//*[@id="app"]/div/div[2]/div[2]/span/div/div/div/div' #访客姓名选择下拉框
+  search_box: '//*[@id="app"]/div/div[2]/div[2]/span/span/input'  #搜索框
+  remarks: '//div[@class="ant-select-dropdown-content"]/ul/li[2]'  #备注
+  list_remark: '//*[@id="app"]/div/div[2]/div[3]/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td[5]' #列表中的备注
+
+  export: '//*[@id="app"]/div/div[2]/div[2]/i' #导出按钮
+
+  view_chatMessage: '查看聊天记录' #查看聊天记录
+  NO_chatMessage: '//*[@id="chatContent"]/div/div' #暂无聊天记录
+
+  service_type: '//*[@id="tree"]/li/span[2]/span/span/span[1]' #服务类型
+  attend: '//*[@id="tree"]/li/span[2]/span/span/span[2]' #添加按钮
+  service_type_name: '//*[@id="classifyManage_className"]' #服务类型名字
+  empty_prompt: '//div[@class="ant-form-explain"]' #服务类型名称为空提示语
+  sucess_prompt: '//div[@class="ant-message"]/span' #ok
+  delect_confirm_button: '//div[@class="ant-modal-confirm-btns"]/button[2]' #删除确认按钮
+  add_confirm_button: '//div[@class="ant-modal-footer"]/div/button[2]' #添加确认按钮
+  delect_service_type: '//*[@id="tree"]/li/ul/li[2]/span[2]/span/span/span[1]'
+  delect_button: '//*[@id="tree"]/li/ul/li[2]/span[2]/span/span/span[2]/i[3]' #小结服务下的删除按钮
+
+
+  all_service_type: '//*[@id="tree"]/li/ul/li/span[2]/span/span/span[1]' #全部服务类型
+
+

@@ -1,0 +1,32 @@
+chat_Record:
+  chat_Record_text: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div[2]/div[3]/a' #聊天记录
+  chooseTime: '//*[@id="app"]/div/div[2]/div[2]/div[1]/span/span'  #时间选择框
+  startTime: '/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input' #开始时间
+  endTime: '/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input' #结束时间
+  now_twoMouth: '/html/body/div[2]/div/div/div/div/div[2]/div/div/span[3]' #最近两个月
+  list_Count: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/ul/li[1]' #列表总计条数
+
+  channel: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div[1]/span/span' #渠道
+  pc_channel: '/html/body/div[3]/div/div/div/ul/li[2]' #网页
+  channel_name: '/html/body/div[3]/div/div/div/ul[2]/li[1]' #售前渠道
+
+  satisficing: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div[2]/div' #满意度
+  very_satisficing: '//*[@class="ant-select-dropdown-content"]/ul/li[2]' #非常满意
+
+  group: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div[3]/div/div' #技能组选择
+  groupName: '//*[@class="ant-select-dropdown-content"]/ul/li[2]' #售前技能组
+  list_groupName: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div/div/div/table/tbody/tr[1]/td[3]' #列表中的技能组
+
+  agent: '//*[@id="app"]/div/div[2]/div[2]/div[2]/div[4]/div' #接待客服
+  agentName: '//*[@class="ant-select-dropdown-content"]/ul/li[2]' #客服名字
+  list_agentName: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div/div/div/table/tbody/tr[1]/td[4]' #列表中客服名字
+
+  list_visitorName: '//*[@id="app"]/div/div[2]/div[3]/div/div/div/div/div/div/table/tbody/tr[1]/td[2]' #列表中的访客姓名
+  visitorName: '//*[@id="app"]/div/div[2]/div[2]/div[3]/span/span/input' #访客姓名输入框
+
+  exportChatRecord: '//*[@id="app"]/div/div[2]/div[2]/div[3]/i'  #导出按钮
+
+  View_chat_history: '查看聊天记录'  #查看聊天记录
+  list_VisitorName: '#app > div > div.container > div > div.left > div.card-list.active > div.ft-mb10.ant-row > div:nth-child(1)' #访客姓名
+
+

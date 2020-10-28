@@ -1,0 +1,7 @@
+iframe:
+    serverSatisficing: '//div[@id="contentView"]/iframe[2]' #客服满意度iframe
+    chat_Record: '//div[@id="contentView"]/iframe[2]' #聊天记录iframe
+    view_chat_Record: '/html/body/div[1]/div/div[2]/div[5]/iframe[3]' #查看聊天记录的iframe
+    service_Summary: '//div[@id="contentView"]/iframe[2]'  #服务记录
+    quality_inspection: '//div[@id="contentView"]/iframe[2]' #质检表单iframe
+    web_channl: '//div[@id="contentView"]/iframe[2]'  #网页渠道iframe

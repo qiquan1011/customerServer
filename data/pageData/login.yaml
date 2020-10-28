@@ -1,0 +1,18 @@
+login:
+  username: '//*[@id="username"]'
+  password: '//*[@id="password"]'
+  login-btn: '//*[@id="login-btn"]' #登录按钮
+  backstage: '//*[@id="modal-content"]/div[1]' #后台管理
+  customer: '//*[@id="modal-content"]/div[2]' #人工客服
+
+url:
+  webadmin: 'http://v5-dev-customer.faqrobot.net/webadmin/login.html' #后台
+  webcustomer: 'http://v5-dev-customer.faqrobot.net/webcustomer/index_standard.html#/login' #人工客服
+
+msg-content_username: '//*[@id="msg-content"]' #请输入密码
+msg-content_password: '//*[@id="msg-content"]' #请输入用户名
+All_Null: '//*[@id="msg-content"]'   #用户名与密码全不填
+msg-content_AllError: '//*[@id="msg-content"]' #用户名或密码错误
+myContent: '//*[@id="app"]/div/div/div[4]/div[1]/div/div[1]/div/div[1]' #我的对话
+
+close_chat: '/html/body/div[2]/span/div/a/span' #关闭小弹窗

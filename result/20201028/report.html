@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>customer_ui自动化测试</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.3"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Adil
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:Error   // pt hiddenRow, ft none
+4:All     //pt none, ft none
+下面设置 按钮展开逻辑  --Yang Yao Jun
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2 || level ==3 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+    //console.log(detail_class.length)
+    if (level == 3) {
+        for (var i = 0; i < detail_class.length; i++){
+            detail_class[i].innerHTML="收起"
+        }
+    }
+    else{
+            for (var i = 0; i < detail_class.length; i++){
+            detail_class[i].innerHTML="详细"
+        }
+    }
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&');
+    s = s.replace(/</g,'<');
+    s = s.replace(/>/g,'>');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">customer_ui自动化测试</h1>
+<p class='attribute'><strong>测试人员 : </strong> qiquan</p>
+<p class='attribute'><strong>开始时间 : </strong> 2020-10-28 10:11:06</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:50:31.238599</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 43，通过 31，失败 11，错误 1，通过率= 72.09%</p>
+
+<p class='description'>用例执行情况</p>
+</div>
+
+
+
+    <p id='show_detail_line'>
+    <a class="btn btn-primary" href='javascript:showCase(0)'>通过率 [72.09% ]</a>
+    <a class="btn btn-success" href='javascript:showCase(2)'>通过[ 31 ]</a>
+    <a class="btn btn-warning" href='javascript:showCase(3)'>错误[ 1 ]</a>
+    <a class="btn btn-danger" href='javascript:showCase(1)'>失败[ 11 ]</a>
+    <a class="btn btn-info" href='javascript:showCase(4)'>所有[ 43 ]</a>
+    </p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>错误</td>
+    <td>失败</td>
+    <td>详细</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>testChatRecord.Main</td>
+    <td class="text-center">8</td>
+    <td class="text-center">6</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',8)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_View_chat_history</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_agent_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_channel_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_exportChatRecord</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt1_4: 
+访客姓名
+游客10517331
+游客10531182
+游客10543698
+游客10556728
+游客10587839
+游客11000722
+游客15181772
+游客15257193
+游客15316077
+游客16423195
+游客16484781
+游客16504041
+游客17253058
+游客17345907
+游客17361341
+游客17394400
+游客17457572
+游客17596927
+游客11407482
+游客14273298
+游客14297527
+游客14541204
+游客14580329
+游客16314673
+游客16370882
+游客16392009
+游客16434584
+游客16467995
+游客16526783
+游客16575355
+游客17006122
+游客17533523
+游客18016826
+游客19177110
+游客19244727
+游客19285580
+游客19327459
+游客11076991
+游客11170487
+游客11202355
+游客11256491
+游客13498028
+游客13537506
+游客13575561
+游客14036861
+游客14120275
+游客14151723
+游客14259738
+游客16072986
+游客16146458
+游客16163874
+游客16309446
+游客16344532
+游客16399501
+游客16423908
+游客16464040
+游客16492493
+游客16593005
+游客17072712
+游客17218777
+游客17389839
+游客17431756
+游客17515067
+游客17569380
+游客18005884
+游客10379123
+游客10478301
+游客10516719
+游客13067229
+游客13095070
+游客13132386
+游客13173576
+游客13219557
+游客13262363
+游客13442293
+游客13495504
+游客13575441
+游客14002864
+游客14054617
+游客14096240
+游客14122077
+游客14250835
+游客14250835
+游客14350966
+游客14350966
+游客14353454
+游客14413107
+游客10325446
+游客10493030
+游客10528217
+游客11198838
+游客11260301
+游客11293404
+游客11369374
+游客11414148
+游客13031958
+游客13094411
+游客13162267
+游客13362583
+游客14144019
+游客14177319
+游客14291032
+游客14320409
+游客16242597
+游客16268022
+游客16304747
+游客16327489
+游客16332960
+游客16385008
+游客16404765
+游客16445545
+['', '访客姓名', '游客10517331', '游客10531182', '游客10543698', '游客10556728', '游客10587839', '游客11000722', '游客15181772', '游客15257193', '游客15316077', '游客16423195', '游客16484781', '游客16504041', '游客17253058', '游客17345907', '游客17361341', '游客17394400', '游客17457572', '游客17596927', '游客11407482', '游客14273298', '游客14297527', '游客14541204', '游客14580329', '游客16314673', '游客16370882', '游客16392009', '游客16434584', '游客16467995', '游客16526783', '游客16575355', '游客17006122', '游客17533523', '游客18016826', '游客19177110', '游客19244727', '游客19285580', '游客19327459', '游客11076991', '游客11170487', '游客11202355', '游客11256491', '游客13498028', '游客13537506', '游客13575561', '游客14036861', '游客14120275', '游客14151723', '游客14259738', '游客16072986', '游客16146458', '游客16163874', '游客16309446', '游客16344532', '游客16399501', '游客16423908', '游客16464040', '游客16492493', '游客16593005', '游客17072712', '游客17218777', '游客17389839', '游客17431756', '游客17515067', '游客17569380', '游客18005884', '游客10379123', '游客10478301', '游客10516719', '游客13067229', '游客13095070', '游客13132386', '游客13173576', '游客13219557', '游客13262363', '游客13442293', '游客13495504', '游客13575441', '游客14002864', '游客14054617', '游客14096240', '游客14122077', '游客14250835', '游客14250835', '游客14350966', '游客14350966', '游客14353454', '游客14413107', '游客10325446', '游客10493030', '游客10528217', '游客11198838', '游客11260301', '游客11293404', '游客11369374', '游客11414148', '游客13031958', '游客13094411', '游客13162267', '游客13362583', '游客14144019', '游客14177319', '游客14291032', '游客14320409', '游客16242597', '游客16268022', '游客16304747', '游客16327489', '游客16332960', '游客16385008', '游客16404765', '游客16445545']
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_group_search</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>失败</button>
+    <div id='div_ft1_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>失败</button>
+    <div id='div_ft1_5' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft1_5: Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testChatRecord.py", line 41, in test_group_search
+    self.assertEqual(result,"售前技能组")
+AssertionError: '售前客服' != '售前技能组'
+- 售前客服
++ 售前技能组
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_satisfic_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_time_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft1_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_visitorName_search</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_8'>错误</button>
+    <div id='div_ft1_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_8'>错误</button>
+    <div id='div_ft1_8' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft1_8: Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testChatRecord.py", line 48, in test_visitorName_search
+    self.assertEqual(result,self.record_Chat.list_visitorName().text)
+  File "C:\Users\yunwen\PycharmProjects\customerServer\page\chat_Record.py", line 74, in list_visitorName
+    return self.driver.find_element_by_xpath(self.data["chat_Record"]["list_visitorName"])
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 394, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 976, in find_element
+    return self.execute(Command.FIND_ELEMENT, {
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="app"]/div/div[2]/div[3]/div/div/div/div/div/div/table/tbody/tr[1]/td[2]"}
+  (Session info: chrome=86.0.4240.111)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>testLogin.Main</td>
+    <td class="text-center">7</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',7)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='ft2_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_login_1___username____password____result__</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_1'>失败</button>
+    <div id='div_ft2_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_1'>失败</button>
+    <div id='div_ft2_1' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft2_1: Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testLogin.py", line 41, in test_login
+    self.assertEqual(self.driver.find_element_by_xpath(self.data["msg-content_username"]).text,result)
+AssertionError: '用户名或密码错误' != 'result'
+- 用户名或密码错误
++ result
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_2___zhang777________请输入密码__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_3________123123____请输入用户名_手机号_邮箱__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_4___zhang777_____123123______</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_5___________请输入用户名_手机号_邮箱__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_6___zhang_____123123____用户名或密码错误__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_7___zhang777____123456abc____用户名或密码错误__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>testServerSatisficing.Main</td>
+    <td class="text-center">9</td>
+    <td class="text-center">8</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',9)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_Time_Seach</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_commonly</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_customer_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_dissatisfied</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft3_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_down_loade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_5'>失败</button>
+    <div id='div_ft3_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_5'>失败</button>
+    <div id='div_ft3_5' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft3_5: [Errno 2] No such file or directory: 'C:/Users/yunwen/Downloads/客服满意度.xls'
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testServerSatisficing.py", line 92, in test_down_loade
+    self.assertIn(self.severSatisFicing.visitorId().text,cls)
+AssertionError: '301DRjg705VCzp4pWdNi1mlPv' not found in []
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_look_message</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_satisfied</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_very_Dissatisfied</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_very_Satisfied</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>testServiceSummary.main</td>
+    <td class="text-center">9</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',9)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_add_service_type_1_______服务类型名称_不能为空__</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft4_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_add_service_type_2___服____失败_同级别类型名重复____</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_2'>失败</button>
+    <div id='div_ft4_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_2'>失败</button>
+    <div id='div_ft4_2' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft4_2: Failed.DuplicateTypeName.repeat
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testServiceSummary.py", line 65, in test_add_service_type
+    self.assertEqual(Result,fially_result)
+AssertionError: '失败，同级别类型名重复!!' != 'Failed.DuplicateTypeName.repeat'
+- 失败，同级别类型名重复!!
++ Failed.DuplicateTypeName.repeat
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_add_service_type_3___小结服务下____ok__</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt4_3: ok
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_add_service_type_4___小结服务下小结服务下小结服务下____ok__</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt4_4: ok
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_export</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_5'>失败</button>
+    <div id='div_ft4_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_5'>失败</button>
+    <div id='div_ft4_5' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft4_5: 服务小结
+访客姓名
+游客11000722
+['服务小结', '访客姓名', '游客11000722']
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testServiceSummary.py", line 54, in test_export
+    self.assertIn(result, cls)
+AssertionError: '游客16445545' not found in ['服务小结', '访客姓名', '游客11000722']
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_remark_search</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_tineSearch</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_view_chatMessage</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_visitorNameSearch</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>testtransfer_To_labor.transfer_To_labor</td>
+    <td class="text-center">10</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">6</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',10)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_create_chat_group</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_1: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-2862F6BCE4C4E193396DBDCFA5961552
+CDwindow-2862F6BCE4C4E193396DBDCFA5961552
+CDwindow-4160777B53991472F7DF8B4F9ACF3480
+MD_UNP_HUA=b212bc37fe8d80bc6a342f3c17663d2a;USERNAME=63910f992acad5e95d0b03ce97b5795f;SESSION=ee656b4c-3c9f-499c-a911-78fa233f20d6
+[]
+MD_UNP_HUA=b212bc37fe8d80bc6a342f3c17663d2a;USERNAME=63910f992acad5e95d0b03ce97b5795f;SESSION=6da4898a-b3ac-4cab-8235-f2ef954b577a
+客服上线技能组： {'code': 1, 'message': 'ok', 'data': [{'tenantId': '149', 'groupId': '1000010343', 'groupName': '售后客服', 'agentId': '30351', 'agentName': '12', 'status': 'ONLINE', 'orginStatus': 'LEAVE', 'agentStatus': 1, 'orginAgentStatus': 3}], 'modelMap': None, 'debug': None, 'success': True}
+讨论组（0）
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 56, in test_create_chat_group
+    self.assertEqual(result,'讨论组（1）')
+AssertionError: '讨论组（0）' != '讨论组（1）'
+- 讨论组（0）
+?     ^
++ 讨论组（1）
+?     ^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_Satisfacted_Invite</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_2'>通过</button>
+    <div id='div_pt5_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_2'>通过</button>
+    <div id='div_pt5_2' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt5_2: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-97CEFB8AA23072F62C09841896BA7A18
+CDwindow-97CEFB8AA23072F62C09841896BA7A18
+CDwindow-9B018F101A0C6514EA1A14B25778BE60
+CDwindow-97CEFB8AA23072F62C09841896BA7A18
+CDwindow-9B018F101A0C6514EA1A14B25778BE60
+['CDwindow-97CEFB8AA23072F62C09841896BA7A18', 'CDwindow-9B018F101A0C6514EA1A14B25778BE60', 'CDwindow-B5FD47B2D33F0A928C3D88C3296ABC2F']
+CDwindow-B5FD47B2D33F0A928C3D88C3296ABC2F
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_3' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_audio</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_3'>失败</button>
+    <div id='div_ft5_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_3'>失败</button>
+    <div id='div_ft5_3' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_3: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-18DF47B25AEA54601188AF7DEB640A0C
+CDwindow-18DF47B25AEA54601188AF7DEB640A0C
+CDwindow-3E35295A13A745CA994C55DD88BCD7AD
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 40, in test_send_audio
+    self.assertIsNotNone(result,msg="出现问题，请及时处理")
+AssertionError: unexpectedly None : 出现问题，请及时处理
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_4' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_docx</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_4'>失败</button>
+    <div id='div_ft5_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_4'>失败</button>
+    <div id='div_ft5_4' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_4: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-8237579668BDA1BC881C81AA4775D328
+CDwindow-8237579668BDA1BC881C81AA4775D328
+CDwindow-E6648746CBA60F78342CF55340195AB6
+点击下载文件 &gt; test.docx
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 36, in test_send_docx
+    self.assertEqual(result,"点击下载文件 &gt; test.docx")
+AssertionError: None != '点击下载文件 &gt; test.docx'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_expression</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_5'>通过</button>
+    <div id='div_pt5_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_5'>通过</button>
+    <div id='div_pt5_5' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt5_5: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-BAC5951328D4F63DD17BEDD5C5931315
+CDwindow-BAC5951328D4F63DD17BEDD5C5931315
+CDwindow-168829627DF730653DB3F62443A00D81
+[&lt;selenium.webdriver.remote.webelement.WebElement (session="021790a199f5e9f0dc991d8c8b674625", element="698b4ee6-461a-4115-a6bb-7632408d12a8")&gt;]
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_news_text</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_6'>通过</button>
+    <div id='div_pt5_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_6'>通过</button>
+    <div id='div_pt5_6' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt5_6: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-17AE67BEF208299F62FA1F0230F23AF9
+CDwindow-17AE67BEF208299F62FA1F0230F23AF9
+CDwindow-6519E6BE6B6905D759881F40F6ED3181
+[&lt;selenium.webdriver.remote.webelement.WebElement (session="beb768210ad6993d148b574a077d5d81", element="6c093bc3-1aa9-4cad-9e3c-30f73edcbca1")&gt;]
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_7' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_picture</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_7'>失败</button>
+    <div id='div_ft5_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_7'>失败</button>
+    <div id='div_ft5_7' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_7: Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 52, in test_send_picture
+    self.assertIsNotNone(result,msg="出现问题，请前来查看")
+AssertionError: unexpectedly None : 出现问题，请前来查看
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_8' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_summary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_8'>失败</button>
+    <div id='div_ft5_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_8'>失败</button>
+    <div id='div_ft5_8' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_8: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-9CBC84042028F720EB129595916FD126
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 48, in test_send_summary
+    self.assertEqual(result,"俺乃燕人张翼得，尔等还不速速离去")
+AssertionError: None != '俺乃燕人张翼得，尔等还不速速离去'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_vidio</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_9'>通过</button>
+    <div id='div_pt5_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_9'>通过</button>
+    <div id='div_pt5_9' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+pt5_9: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-F63FACEF923321DD0F7BC45F5749313D
+CDwindow-F63FACEF923321DD0F7BC45F5749313D
+CDwindow-9CC6075DD9806A6843CF9ECBC3F31CD5
+[&lt;selenium.webdriver.remote.webelement.WebElement (session="034b65d5768f65761badce6a02a0482d", element="3ff6b87b-b537-4c8b-abdf-53bf1c347166")&gt;]
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_10' class='none'>
+    <td class='failCase'><div class='testcase'>test_transfer_To_Labor</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_10'>失败</button>
+    <div id='div_ft5_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_10'>失败</button>
+    <div id='div_ft5_10' class="collapse in" style='text-align: left; color:red;cursor:pointer'>
+    <pre>
+    
+ft5_10: http://v5-dev-customer.faqrobot.net/webadmin/#/layout
+CDwindow-B8577321C0FEC256CDA67B7D72B06E82
+Traceback (most recent call last):
+  File "C:\Users\yunwen\PycharmProjects\customerServer\testCase\testtransfer_To_labor.py", line 21, in test_transfer_To_Labor
+    self.assertIsNotNone(result)
+AssertionError: unexpectedly None
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>43</td>
+    <td>31</td>
+    <td>1</td>
+    <td>11</td>
+    <td>通过率：72.09%</td>
+</tr>
+</table>
+
+<div id='ending'> </div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

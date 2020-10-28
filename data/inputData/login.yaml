@@ -1,0 +1,10 @@
+webadmin_login:
+  username: 'auto_test'
+  password: '123123'
+  username_error: 'qeruyqewr'
+  password_error: 'qrqfffasfasf'
+
+customer_login:
+  username: 'autokefu'
+  password: '123456abc'
+
